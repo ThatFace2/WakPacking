@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ff037792ef2294bab5d2593c928165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GridSize: {x: 2, y: 2, z: 2}
-  m_GridColor: {r: 0.45882356, g: 0.45882356, b: 0.45882356, a: 1}
+  m_GridSize: {x: 5, y: 5, z: 5}
+  m_GridColor: {r: 0.2784314, g: 0.2784314, b: 0.2784314, a: 1}
 --- !u!4 &1423807868
 Transform:
   m_ObjectHideFlags: 0

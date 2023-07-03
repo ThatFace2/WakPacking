@@ -60,6 +60,40 @@ public class WpGridSystemEditor : Editor
             Vector3.zero,
             new(-size.x, -.5f * size.x)
         });
+
+        float min = 2.4f, max = 24f;
+        var gridColor = gridSystem.GridColor;
+        gridColor.a = 1 - Mathf.LinearToGammaSpace((sceneView.size - min) / (max - min));
+        Gizmos.color = gridColor;
+        for (var i = 1; i < size.x; i++)
+        {
+            Gizmos.DrawLine(
+                new Vector3(-i, -.5f * i),
+                new Vector3(-i, size.y - .5f * i));
+            Gizmos.DrawLine(
+                new Vector3(-i, -.5f * i),
+                new Vector3(size.z - i, -.5f * (size.z + i)));
+        }
+
+        for (var i = 1; i < size.y; i++)
+        {
+            Gizmos.DrawLine(
+                new Vector3(0, i),
+                new Vector3(-size.x, -.5f * size.x + i));
+            Gizmos.DrawLine(
+                new Vector3(0, i),
+                new Vector3(size.z, -.5f * size.z + i));
+        }
+
+        for (var i = 1; i < size.z; i++)
+        {
+            Gizmos.DrawLine(
+                new Vector3(i, -.5f * i),
+                new Vector3(i, size.y - .5f * i));
+            Gizmos.DrawLine(
+                new Vector3(i, -.5f * i),
+                new Vector3(-size.x + i, -.5f * (size.x + i)));
+        }
     }
 
     #endregion
