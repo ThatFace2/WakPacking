@@ -41,23 +41,26 @@ public class WpGridSystemEditor : Editor
 
         var size = gridSystem.GridSize;
         var origin = gridSystem.transform.position;
+        var yAxis = gridSystem.transform.up;
+        var xAxis = -gridSystem.transform.right - 0.5f * gridSystem.transform.up;
+        var zAxis = gridSystem.transform.right - 0.5f * gridSystem.transform.up;
 
         // draw outside grid
         Gizmos.color = gridSystem.GridColor;
         Gizmos.DrawLineStrip(new Vector3[]
         {
-            origin + new Vector3(0, size.y),
-            origin + new Vector3(size.z, size.y + -.5f * size.z),
-            origin + new Vector3(size.z, -.5f * size.z),
-            origin + new Vector3(-size.x + size.z, -.5f * (size.x + size.z)),
-            origin + new Vector3(-size.x, -.5f * size.x),
-            origin + new Vector3(-size.x, size.y + -.5f * size.x)
+            origin + size.y * yAxis,
+            origin + size.y * yAxis + size.z * zAxis,
+            origin + size.z * zAxis,
+            origin + size.x * xAxis + size.z * zAxis,
+            origin + size.x * xAxis,
+            origin + size.x * xAxis + size.y * yAxis
         }, true);
         Gizmos.DrawLineList(new Vector3[]
         {
-            origin, origin + new Vector3(0, size.y),
-            origin, origin + new Vector3(size.z, -.5f * size.z),
-            origin, origin + new Vector3(-size.x, -.5f * size.x)
+            origin, size.x * xAxis,
+            origin, size.y * yAxis,
+            origin, size.z * zAxis
         });
 
         // draw inside grid
@@ -69,31 +72,31 @@ public class WpGridSystemEditor : Editor
         for (var i = 1; i < size.x; i++)
         {
             Gizmos.DrawLine(
-                origin + new Vector3(-i, -.5f * i),
-                origin + new Vector3(-i, size.y - .5f * i));
+                origin + i * xAxis,
+                origin + i * xAxis + size.y * yAxis);
             Gizmos.DrawLine(
-                origin + new Vector3(-i, -.5f * i),
-                origin + new Vector3(size.z - i, -.5f * (size.z + i)));
+                origin + i * xAxis,
+                origin + i * xAxis + size.z * zAxis);
         }
 
         for (var i = 1; i < size.y; i++)
         {
             Gizmos.DrawLine(
-                origin + new Vector3(0, i),
-                origin + new Vector3(-size.x, -.5f * size.x + i));
+                origin + i * yAxis,
+                origin + i * yAxis + size.x * xAxis);
             Gizmos.DrawLine(
-                origin + new Vector3(0, i),
-                origin + new Vector3(size.z, -.5f * size.z + i));
+                origin + i * yAxis,
+                origin + i * yAxis + size.z * zAxis);
         }
 
         for (var i = 1; i < size.z; i++)
         {
             Gizmos.DrawLine(
-                origin + new Vector3(i, -.5f * i),
-                origin + new Vector3(i, size.y - .5f * i));
+                origin + i * zAxis,
+                origin + i * zAxis + size.y * yAxis);
             Gizmos.DrawLine(
-                origin + new Vector3(i, -.5f * i),
-                origin + new Vector3(-size.x + i, -.5f * (size.x + i)));
+                origin + i * zAxis,
+                origin + i * zAxis + size.x * xAxis);
         }
     }
 
