@@ -65,9 +65,9 @@ public class WpGridSystemEditor : Editor
 
         // draw inside grid
         // 내부 그리드 선은 scene view의 사이즈가 클수록 옅게 조정됩니다
-        float min = 2.4f, max = 24f;
+        float min = 4.8f, max = 48f;
         var gridColor = gridSystem.GridColor;
-        gridColor.a = 1 - Mathf.LinearToGammaSpace((sceneView.size - min) / (max - min));
+        gridColor.a = 1 - Mathf.LinearToGammaSpace((sceneView.cameraDistance - min) / (max - min));
         Gizmos.color = gridColor;
         for (var i = 1; i < size.x; i++)
         {
