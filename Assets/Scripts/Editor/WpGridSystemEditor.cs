@@ -42,6 +42,7 @@ public class WpGridSystemEditor : Editor
         var size = gridSystem.GridSize;
         var origin = gridSystem.transform.position;
 
+        // draw outside grid
         Gizmos.color = gridSystem.GridColor;
         Gizmos.DrawLineStrip(new Vector3[]
         {
@@ -59,6 +60,8 @@ public class WpGridSystemEditor : Editor
             origin, origin + new Vector3(-size.x, -.5f * size.x)
         });
 
+        // draw inside grid
+        // 내부 그리드 선은 scene view의 사이즈가 클수록 옅게 조정됩니다
         float min = 2.4f, max = 24f;
         var gridColor = gridSystem.GridColor;
         gridColor.a = 1 - Mathf.LinearToGammaSpace((sceneView.size - min) / (max - min));
